@@ -46,7 +46,7 @@ def upload_lunch_menu(posts: list[TodayPost], target_profile: str) -> None:
     ]
 
     try:
-        client.files_upload_v2(
+        response = client.files_upload_v2(
             channel=channel_id,
             file_uploads=file_uploads,
             initial_comment=message,
@@ -54,3 +54,11 @@ def upload_lunch_menu(posts: list[TodayPost], target_profile: str) -> None:
     except SlackApiError as exc:
         error = exc.response.get("error", "unknown_error")
         raise RuntimeError(f"Slack 업로드 실패: {error}") from exc
+
+    uploaded = response.get("files") or []
+    if len(uploaded) != image_count:
+        raise RuntimeError(
+            f"Slack 업로드 불일치: 요청 {image_count}장, 실제 업로드 {len(uploaded)}장"
+        )
+
+    print(f"Slack 업로드 확인: {len(uploaded)}장")

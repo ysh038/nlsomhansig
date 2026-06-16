@@ -104,6 +104,9 @@ def _fetch_today_posts_inner(target_profile: str) -> list[TodayPost]:
 
         if post_date == today:
             image_paths = _download_post_images(post, target_profile)
+            if not image_paths:
+                print(f"  ! {post.shortcode}: 이미지 없음 (동영상 전용 게시물일 수 있음), 건너뜀")
+                continue
             caption = post.caption or "오늘의 점심 메뉴"
             today_posts.append(
                 TodayPost(
