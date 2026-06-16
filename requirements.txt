@@ -1,0 +1,3 @@
+instaloader>=4.15
+slack-sdk>=3.27
+python-dotenv>=1.0
