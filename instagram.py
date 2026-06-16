@@ -58,8 +58,9 @@ def _load_session(loader: instaloader.Instaloader) -> None:
 
 
 def _post_date_kst(post: instaloader.Post) -> datetime.date:
-    # date_local은 서버 타임존(Actions=UTC)에 따라 달라지므로 UTC→KST로 통일
-    return post.date_utc.astimezone(KST).date()
+    # date_utc는 naive datetime(tzinfo 없음)이므로 UTC를 명시한 뒤 KST 변환
+    from datetime import timezone as _tz
+    return post.date_utc.replace(tzinfo=_tz.utc).astimezone(KST).date()
 
 
 def _download_post_images(post: instaloader.Post, target_profile: str) -> list[Path]:
