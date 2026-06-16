@@ -2,7 +2,7 @@ name: Lunch Menu Bot
 
 on:
   schedule:
-  - cron: '0 0 * * 1-5'
+  - cron: '0 1 * * 1-5'  # UTC 01:00 = KST 10:00 (평일)
   workflow_dispatch:
 
 jobs:

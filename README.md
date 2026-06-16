@@ -7,7 +7,7 @@
 1. Instaloader로 `nlsomhansig` 최신 게시물 확인
 2. 오늘(KST) 올라온 게시물만 이미지 다운로드
 3. Slack `files.upload_v2`로 채널에 업로드
-4. GitHub Actions가 평일 10:30, 11:00(KST)에 실행
+4. GitHub Actions가 평일 10:00(KST)에 실행
 
 ## 사전 설정
 
@@ -85,7 +85,7 @@ Actions 탭 → **Lunch Menu Bot** → **Run workflow**
 
 | KST | UTC cron | 설명 |
 |-----|----------|------|
-| 09:00 | `0 0 * * 1-5` | 평일 오전 실행 |
+| 10:00 | `0 1 * * 1-5` | 평일 오전 실행 |
 
 `state.json`으로 같은 게시물 중복 전송을 방지합니다.
 
